@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sunglasses Detail Page</title>
+    <meta name="description" content="텀블러 상세페이지" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&family=Noto+Sans+KR:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/detail.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="bar">
+        <h1>Detail Page</h1>
+        <span class="muted">Stanley Tubler</span>
+
+        <nav class="toc" aria-label="Page shortcuts">
+          <a href="#p-main-title">tltle</a>
+          <a href="#p-view">View</a>
+          <a href="#p-information">Information</a>
+          <a href="#p-technology">Technology</a>
+          <a href="#p-sun-image">Image</a>
+          <a href="#p-policy">Policy</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <article class="page" id="top">
+        <div class="title" id="p-main-title">
+          <img
+            src="images/Frame 1.png"
+            alt="Detail long page hero"
+            loading="lazy"
+          />
+        </div>
+        <div class="title" id="p-view">
+          <img
+            src="images/Frame 3-1.png"
+            alt="Detail long page hero"
+            loading="lazy"
+          />
+        </div>
+        <div class="title" id="p-information">
+          <img
+            src="images/룰루-수정본.gif"
+            alt="Detail long page hero"
+            loading="lazy"
+          />
+        </div>
+        <div class="title" id="p-information">
+          <img
+            src="images/Frame 4-1.png"
+            alt="Detail long page hero"
+            loading="lazy"
+          />
+        </div>
+        <div class="title" id="p-technology">
+          <img
+            src="images/Frame 6.png"
+            alt="Detail long page hero"
+            loading="lazy"
+          />
+        </div>
+        <div class="title" id="p-technology">
+          <img
+            src="images/리드결합분해.gif"
+            alt="Detail long page hero"
+            loading="lazy"
+          />
+        </div>
+        <div class="title" id="p-policy">
+          <img
+            src="images/Frame 8.png"
+            alt="Detail long page hero"
+            loading="lazy"
+          />
+          <div class="title" id="p-policy">
+            <img
+              src="images/룰라라라.png"
+              alt="Detail long page hero"
+              loading="lazy"
+            />
+          <div class="title" id="p-policy">
+            <img
+              src="images/text_final.gif"
+              alt="Detail long page hero"
+              loading="lazy"
+            />
+        </div>
+        <div class="title" id="p-policy">
+          <img
+            src="images/Frame 9.png"
+            alt="Detail long page hero"
+            loading="lazy"
+          />
+        </div>
+        <footer>© 2025 LEE DONGGYU</footer>
+      </article>
+    </main>
+
+    <!-- 알약형 TOP 버튼 -->
+    <button id="toTop" class="top-btn pill" aria-label="맨 위로 이동">
+      <span>TOP</span>
+    </button>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // ── 상단 TOC 활성화 표시
+        const links = [...document.querySelectorAll(".toc a")];
+        const sections = links
+          .map((a) => document.querySelector(a.getAttribute("href")))
+          .filter(Boolean);
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            const visible = entries
+              .filter((e) => e.isIntersecting)
+              .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+            if (!visible) return;
+            const id = "#" + visible.target.id;
+            links.forEach((a) =>
+              a.classList.toggle("active", a.getAttribute("href") === id)
+            );
+          },
+          {
+            rootMargin: "-30% 0px -60% 0px",
+            threshold: [0, 0.25, 0.5, 0.75, 1],
+          }
+        );
+
+        sections.forEach((sec) => io.observe(sec));
+
+        // ── TOP 버튼 노출/동작
+        const topBtn = document.getElementById("toTop");
+        const showAt = 300; // px 이상 스크롤되면 보이기
+
+        function toggleTopBtn() {
+          if (window.scrollY > showAt) topBtn.classList.add("show");
+          else topBtn.classList.remove("show");
+        }
+        window.addEventListener("scroll", toggleTopBtn, { passive: true });
+        toggleTopBtn();
+
+        topBtn.addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      });
+    </script>
+  </body>
+</html>
